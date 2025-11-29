@@ -1,0 +1,51 @@
+### GitHub仓库服务 API测试文件
+### 在IntelliJ IDEA中可以直接运行这些HTTP请求
+### 使用方法：点击请求旁边的绿色运行按钮
+
+### 1. 测试成功场景 - Spring Boot仓库
+GET http://localhost:8080/api/repos/spring-projects/spring-boot
+Accept: application/json
+
+###
+
+### 2. 测试成功场景 - Vue.js仓库
+GET http://localhost:8080/api/repos/vuejs/vue
+Accept: application/json
+
+###
+
+### 3. 测试成功场景 - React仓库
+GET http://localhost:8080/api/repos/facebook/react
+Accept: application/json
+
+###
+
+### 4. 测试成功场景 - Linux内核仓库
+GET http://localhost:8080/api/repos/torvalds/linux
+Accept: application/json
+
+###
+
+### 5. 测试失败场景 - 仓库不存在
+GET http://localhost:8080/api/repos/invalid-owner-12345/invalid-repo-67890
+Accept: application/json
+
+###
+
+### 6. 测试失败场景 - 参数格式错误（所有者包含非法字符）
+GET http://localhost:8080/api/repos/invalid@owner/some-repo
+Accept: application/json
+
+###
+
+### 7. 测试失败场景 - 参数格式错误（仓库名包含非法字符）
+GET http://localhost:8080/api/repos/validowner/invalid#repo
+Accept: application/json
+
+###
+
+### 8. 测试自定义仓库 - 替换为你自己的仓库
+GET http://localhost:8080/api/repos/YOUR_USERNAME/YOUR_REPO
+Accept: application/json
+
+###

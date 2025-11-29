@@ -1,0 +1,77 @@
+# Spring application configuration
+spring:
+  application:
+    name: github-repo-service
+  
+  # Data source configuration
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/github_repo_service?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+    # Hikari connection pool configuration
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: GitHubRepoHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  
+  # Jackson configuration
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: false
+
+# Server configuration
+server:
+  port: 8080
+
+# GitHub API configuration
+github:
+  api:
+    base-url: https://api.github.com
+    timeout: 10
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+    com.github.githubreposervice: DEBUG
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+
+# MyBatis-Plus configuration
+mybatis-plus:
+  # Configuration
+  configuration:
+    # Log implementation
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # Enable camelCase to underscore conversion
+    map-underscore-to-camel-case: true
+    # Cache
+    cache-enabled: false
+  # Global configuration
+  global-config:
+    # Database configuration
+    db-config:
+      # Primary key type: auto increment
+      id-type: auto
+      # Logical delete field
+      logic-delete-field: isDeleted
+      # Logical delete value
+      logic-delete-value: 1
+      # Logical not deleted value
+      logic-not-delete-value: 0
+  # Mapper XML file location
+  mapper-locations: classpath*:/mapper/**/*.xml
+  # Entity class package path
+  type-aliases-package: com.github.githubreposervice.entity
+
+# Cache configuration
+cache:
+  # Cache expiration time (minutes)
+  expire-minutes: 30

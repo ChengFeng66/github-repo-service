@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.githubreposervice.mapper.GitHubRepoMapper">
+
+    <!-- Result mapping -->
+    <resultMap id="BaseResultMap" type="com.github.githubreposervice.entity.GitHubRepo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="full_name" property="fullName" jdbcType="VARCHAR"/>
+        <result column="owner" property="owner" jdbcType="VARCHAR"/>
+        <result column="repo_name" property="repoName" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="clone_url" property="cloneUrl" jdbcType="VARCHAR"/>
+        <result column="stars" property="stars" jdbcType="INTEGER"/>
+        <result column="forks" property="forks" jdbcType="INTEGER"/>
+        <result column="watchers" property="watchers" jdbcType="INTEGER"/>
+        <result column="repo_size" property="repoSize" jdbcType="INTEGER"/>
+        <result column="default_branch" property="defaultBranch" jdbcType="VARCHAR"/>
+        <result column="is_private" property="isPrivate" jdbcType="TINYINT"/>
+        <result column="html_url" property="htmlUrl" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="pushed_at" property="pushedAt" jdbcType="TIMESTAMP"/>
+        <result column="cache_time" property="cacheTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <!-- Base columns -->
+    <sql id="Base_Column_List">
+        id, full_name, owner, repo_name, description, clone_url, stars, forks, watchers,
+        repo_size, default_branch, is_private, html_url, created_at, updated_at, pushed_at,
+        cache_time, create_time, update_time, is_deleted
+    </sql>
+
+    <!-- Query by repository full name -->
+    <select id="selectByFullName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM github_repo
+        WHERE full_name = #{fullName}
+        AND is_deleted = 0
+        LIMIT 1
+    </select>
+
+    <!-- Query by owner and repository name -->
+    <select id="selectByOwnerAndRepo" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM github_repo
+        WHERE owner = #{owner}
+        AND repo_name = #{repoName}
+        AND is_deleted = 0
+        LIMIT 1
+    </select>
+
+</mapper>
