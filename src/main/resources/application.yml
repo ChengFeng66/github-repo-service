@@ -41,15 +41,20 @@ logging:
   level:
     root: INFO
     com.github.githubreposervice: DEBUG
+    org.springframework: INFO
+    com.baomidou.mybatisplus: DEBUG
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+  file:
+    path: ./logs
+    name: ./logs/github-repo-service.log
 
 # MyBatis-Plus configuration
 mybatis-plus:
   # Configuration
   configuration:
-    # Log implementation
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # Log implementation - Use SLF4J for SQL output
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
     # Enable camelCase to underscore conversion
     map-underscore-to-camel-case: true
     # Cache

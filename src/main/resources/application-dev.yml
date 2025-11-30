@@ -1,0 +1,38 @@
+# Spring application configuration - Development Profile
+spring:
+  application:
+    name: github-repo-service
+  
+  # Data source configuration
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/github_repo_service?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+    # Hikari connection pool configuration
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: GitHubRepoHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+
+# Logging configuration - Development
+logging:
+  level:
+    root: INFO
+    com.github.githubreposervice: DEBUG
+    org.springframework: INFO
+    org.springframework.web: DEBUG
+    com.baomidou.mybatisplus: DEBUG
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+
+# MyBatis-Plus configuration
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: false
